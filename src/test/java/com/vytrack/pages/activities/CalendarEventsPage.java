@@ -29,7 +29,7 @@ public class CalendarEventsPage {
     @FindBy(css = "a[title='Reset']")
     public WebElement resetBtnElement;
 
-    @FindBy(css = ".grid-header-cell__label")
+    @FindBy(css = ".grid-header-cell__label") // . means className in css selector
     public List<WebElement> headers;
 
     @FindBy(css = "[id^='date_selector_oro_calendar_event_form_start']")
@@ -220,7 +220,7 @@ public class CalendarEventsPage {
         return endDate.getAttribute("value");
     }
 
-    public String getSartTime() {
+    public String getStartTime() {
         return startTime.getAttribute("value");
     }
 

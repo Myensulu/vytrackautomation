@@ -9,15 +9,20 @@ import com.vytrack.utilities.VYTrackUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CalendarEventsTests extends TestBase {
+public class CalendarEventsTests extends TestBase {  // We are extending it,cuz before & after class is coming from Test Base
+
     @Test
     public void verifyTitleColumn() {
         extentLogger = report.createTest("Verify column names");
+        // created object of LoginPage
+        // that has method to log in
         LoginPage loginPage = new LoginPage();
+        // created object of CalendarEventsPage
         CalendarEventsPage calendarPage = new CalendarEventsPage();
+        // created variables
         String username = ConfigurationReader.getProperty("storemanagerusername");
         String password = ConfigurationReader.getProperty("storemanagerpassword");
-        //login
+        //login parameters
         loginPage.login(username, password);
 
         //go to Calendar Events page
@@ -41,5 +46,4 @@ public class CalendarEventsTests extends TestBase {
         //Verify that title column name is visible again
         Assert.assertTrue(calendarPage.verifyHeaderExists("Title"), "Title column is not visible.");
     }
-
 }

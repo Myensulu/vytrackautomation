@@ -9,7 +9,7 @@ import com.vytrack.utilities.VYTrackUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class DateAndTimeTestsExample extends TestBase {  // We are extending it,cuz before & after class is coming from Test Base
+public class DateAndTimeTests extends TestBase {  // We are extending it,cuz before & after class is coming from Test Base
 
     /*
      * Test Case 1  (Date Time, End date auto adjust)
