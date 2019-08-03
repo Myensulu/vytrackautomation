@@ -4,6 +4,7 @@ import com.vytrack.utilities.Driver;
 import com.vytrack.utilities.SeleniumUtils;
 import com.vytrack.utilities.VYTrackUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,8 +19,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Random;
 
 public class CalendarEventsPage {
+
     @FindBy(css = "[title='Create Calendar event']")
     public WebElement createCalendarEventBtn;
 
@@ -54,6 +57,50 @@ public class CalendarEventsPage {
 
     @FindBy(css = "[id^='recurrence-repeat-view']")
     public WebElement repeatCheckbox;
+
+    @FindBy(css = "span[style^='width: 292']")
+    public WebElement dailyIsDefault;
+
+    @FindBy(css = "div[data-name='recurrence-daily']>div>div>div:nth-of-type(2)>div>label>input:nth-of-type(3)")
+    public WebElement dayBox;
+
+    @FindBy(css = "span[id^='temp-validation-name-']")
+    public WebElement errorMessage;
+
+    @FindBy(css = "label[class='fields-row']+span[class='validation-failed']")//"//label[@class='fields-row']/following-sibling::span[@class='validation-failed']")
+    public WebElement eNewMessage;
+
+    @FindBy(css = "div[data-name='recurrence-daily']>div>div>div:nth-of-type(2)>div>label>input:nth-of-type(3)")
+    public WebElement dailyValueLocator;
+
+    @FindBy(xpath = "//div[@class='control-label wrap']/following-sibling::div[@data-name='recurrence-summary']//div//span[1]")
+    public WebElement summaryLocator;
+
+    @FindBy(xpath = "//div[@class='control-label wrap']/following-sibling::div[@data-name='recurrence-summary']//div//span[2]")
+    public WebElement summaryLocator2;
+
+    @FindBy(css ="div[data-name='recurrence-ends']>div>div:nth-of-type(2)>div>label>span+input")
+    public WebElement afterOccurrencesValueBox;
+
+    @FindBy(css = "div[data-name='recurrence-ends']>div>div:nth-of-type(2)>div:nth-of-type(2)>span>span>span")
+    public WebElement msg1;
+
+    @FindBy(css = "div[data-name='recurrence-ends']>div>div:nth-of-type(2)>div:nth-of-type(2)>span")
+    public WebElement msg2;
+
+
+    //this method will enter a value between
+    public void enterRandomDays(WebElement element) {
+        Random rndNum = new Random();
+        int value = rndNum.ints(1,1,100).findFirst().getAsInt();
+        element.click();
+        element.clear();
+        element.sendKeys(value + "", Keys.ENTER);
+    }
+
+
+
+
 
 
     public CalendarEventsPage() {
@@ -144,7 +191,6 @@ public class CalendarEventsPage {
         Driver.getDriver().findElement(By.xpath(dayLocator)).click();
     }
 
-
     public void selectADay(int plusDays) {
         int day = LocalDate.now().plusDays(plusDays).getDayOfMonth();
         int month = LocalDate.now().plusDays(plusDays).getMonth().getValue();
@@ -211,6 +257,10 @@ public class CalendarEventsPage {
         VYTrackUtils.waitUntilLoaderScreenDisappear();
         createCalendarEventBtn.click();
     }
+    public void clickOnRepeatCheckbox(){
+        VYTrackUtils.waitUntilLoaderScreenDisappear();
+        repeatCheckbox.click();
+    }
 
     public String getStartDate() {
         return startDate.getAttribute("value");
@@ -227,5 +277,6 @@ public class CalendarEventsPage {
     public String getEndTime() {
         return endTime.getAttribute("value");
     }
+
 }
 

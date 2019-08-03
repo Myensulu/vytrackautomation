@@ -25,9 +25,13 @@ public class DateAndTimeTestsPractice extends TestBase { // We are extending it,
     @Test(priority = 1, description = "Verify that date auto adjustable")
     public void test_1(){
         extentLogger = report.createTest("Verify that date auto adjustable");
+        // created object of LoginPage
+        // that has method to log in
         LoginPage loginPage = new LoginPage();
+        // created object of CalendarEventsPage
         CalendarEventsPage calendarPage = new CalendarEventsPage();
 
+        // read the username and password from .properties file
         String username = ConfigurationReader.getProperty("storemanagerusername");
         String password = ConfigurationReader.getProperty("storemanagerpassword");
         loginPage.login(username, password);
